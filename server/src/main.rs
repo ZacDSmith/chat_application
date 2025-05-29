@@ -4,7 +4,7 @@ use std::sync::mpsc;
 use std::thread;
 
 const LOCAL: &str = "127.0.0.1:6000";
-const MSG_SIZE: usize = 32;
+const MSG_SIZE: usize = 64;
 
 fn sleep() {
     thread::sleep(::std::time::Duration::from_millis(100));
@@ -17,7 +17,7 @@ fn main() {
     let mut clients = vec![];
     let (tx, rx) = mpsc::channel::<String>();
     loop {
-        if let Ok((mut socket, addr)) == server.accept() {
+        if let Ok((mut socket, addr)) = server.accept() {
             println!("Client {} connected", addr);
 
             let tx = tx.clone();
